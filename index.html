@@ -1031,4 +1031,28 @@ initKamba();
 })();
 </script>
 </body>
-</html>
+</html><script>
+async function prepararNotificacoesExternas() {
+  if (!('serviceWorker' in navigator)) {
+    console.warn('Service Worker não suportado neste navegador.');
+    return;
+  }
+
+  try {
+    const registro = await navigator.serviceWorker.register('./sw.js');
+    console.log(
+      'Kamba Angola: notificações externas preparadas.',
+      registro.scope
+    );
+  } catch (erro) {
+    console.error(
+      'Kamba Angola: erro ao registar notificações.',
+      erro
+    );
+  }
+}
+
+window.addEventListener('load', function() {
+  prepararNotificacoesExternas();
+});
+</script>
